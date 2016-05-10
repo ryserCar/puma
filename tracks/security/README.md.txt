@@ -1,0 +1,10 @@
+XSS (abreviatura de Cross Site Scripting) 
+=========================================
+Es una vulnerabilidad generalizada que afecta a muchas aplicaciones web. El peligro detrás del XSS es que permite a un atacante inyectar contenido en un sitio web y modificar la forma en que ese contenido se muestra, lo que obliga al navegador de la víctima ejecutar el código suministrado por el atacante durante la carga de la página.
+En general, las vulnerabilidades XSS requieren algún tipo de interacción por parte del usuario, sea a través de ingeniería social o esperando a alguien visitar una página específica para desencadenar la vulnerabilidad. Es por ello que, a menudo, esta vulnerabilidad no se toma tan en serio por los desarrolladores, pero si no se corrige pronto, puede ser muy peligrosa.
+
+##La Inyección de Vulnerabilidad XSS
+Cualquier sitio web o aplicación puede tener varias entradas. Se extienden desde los campos de formulario hasta la propia URL, que se convertirá en datos a manejar por el código. Un ejemplo sencillo de los datos son los formularios con nombre, nombre del usuario, contraseña, o cualquier otra forma de entrada.
+Cada uno de estos puntos de datos son considerados como entradas y pueden ser manipulados si el código no valida las entradas y salidas de desinfección adecuadamente. Cuando una entrada fue especialmente diseñada para contener una secuencia particular de caracteres para que el servidor o el navegador respondan de una forma deseada, esto se llama inyección.
+Este tipo de inyección es conocido como Cross-Site Scripting (XSS): una manera de inyectar código que ejecutará acciones en el navegador por un sitio web. Esta acción puede ser abrasiva y notificar al usuario, o puede funcionar en segundo plano sin el conocimiento del usuario.
+Tal vez la prueba del concepto (Proof of Concept – POC) más rudimentaria que se puede ver puede incluir el uso de una marca de script muy básica que genera un pop-up notificando de un fallo en la página. Esta secuencia de comandos es la siguiente:
