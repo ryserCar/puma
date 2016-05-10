@@ -1,4 +1,4 @@
-XSS (abreviatura de Cross Site Scripting) 
+#XSS (abreviatura de Cross Site Scripting) 
 =========================================
 Es una vulnerabilidad generalizada que afecta a muchas aplicaciones web. El peligro detrás del XSS es que permite a un atacante inyectar contenido en un sitio web y modificar la forma en que ese contenido se muestra, lo que obliga al navegador de la víctima ejecutar el código suministrado por el atacante durante la carga de la página.
 En general, las vulnerabilidades XSS requieren algún tipo de interacción por parte del usuario, sea a través de ingeniería social o esperando a alguien visitar una página específica para desencadenar la vulnerabilidad. Es por ello que, a menudo, esta vulnerabilidad no se toma tan en serio por los desarrolladores, pero si no se corrige pronto, puede ser muy peligrosa.
