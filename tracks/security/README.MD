@@ -11,6 +11,10 @@ Tal vez la prueba del concepto **(Proof of Concept – POC)** más rudimentaria 
 ```
 A través de este ejemplo, se utiliza un par de etiquetas HTML que definen un bloque de Javascript. Dentro de esto, la llamada a la función que hace que la caja aparezca con la siguiente frase: **THIS IS AN XSS VULNERABILITY!!!**
 
+##Process of XSS
+
+![alt tag](http://4.bp.blogspot.com/-mK6KVAZj3UM/TuVkCUqK6QI/AAAAAAAAAFw/_Tbj-bR3N3U/s1600/xss_how.png)
+
 ##Tipos de XSS
 Ni todas las vulnerabilidades XSS son las mismas, hay varios tipos y aquí le mostramos una visión general de alto nivel de cada uno de ellos, incluyendo sus modos de entrega, para proporcionar un contexto:
 ![alt tag](https://blog.sucuri.net/wp-content/uploads/2016/04/Sucuri-Blog-XSS-Types.png)
